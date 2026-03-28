@@ -40,10 +40,12 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>tell application "System Events"
-    keystroke "{var:admin_email}"
+				<string>set adminEmail to (system attribute "admin_email")
+set adminPassword to (system attribute "admin_password")
+tell application "System Events"
+    keystroke adminEmail
     key code 48
-    keystroke "{var:admin_password}"
+    keystroke adminPassword
     key code 36
 end tell</string>
 				<key>scriptargtype</key>
