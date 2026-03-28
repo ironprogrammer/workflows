@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ironprogrammer.workflows.admincreds</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>C5C8D4F3-73D5-421A-AB3C-F6696A71E9A4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1EFB6096-8509-46D8-A00E-6E2E5C153F2C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>ironprogrammer</string>
+	<key>description</key>
+	<string>Enter and submit common admin credentials.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Admin Credentials</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>tell application "System Events"
+    keystroke "{var:admin_email}"
+    key code 48
+    keystroke "{var:admin_password}"
+    key code 36
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>1EFB6096-8509-46D8-A00E-6E2E5C153F2C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>keyword</key>
+				<string>aadmin</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.snippet</string>
+			<key>uid</key>
+			<string>C5C8D4F3-73D5-421A-AB3C-F6696A71E9A4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>1EFB6096-8509-46D8-A00E-6E2E5C153F2C</key>
+		<dict>
+			<key>xpos</key>
+			<real>300</real>
+			<key>ypos</key>
+			<real>50</real>
+		</dict>
+		<key>C5C8D4F3-73D5-421A-AB3C-F6696A71E9A4</key>
+		<dict>
+			<key>xpos</key>
+			<real>55</real>
+			<key>ypos</key>
+			<real>50</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>admin@example.com</string>
+				<key>placeholder</key>
+				<string>admin@example.com</string>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The username or email to type into the login form.</string>
+			<key>label</key>
+			<string>Email / Username</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>admin_email</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>password</string>
+				<key>placeholder</key>
+				<string>password</string>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The password to type into the login form.</string>
+			<key>label</key>
+			<string>Password</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>admin_password</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://brianalexander.com</string>
+</dict>
+</plist>
