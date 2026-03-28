@@ -79,7 +79,9 @@ end tell</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Type `aadmin` in any login form to auto-fill credentials and submit.
+
+Configure the email/username and password to the left. Defaults work well for local WordPress and Laravel dev environments.</string>
 	<key>uidata</key>
 	<dict>
 		<key>1EFB6096-8509-46D8-A00E-6E2E5C153F2C</key>
