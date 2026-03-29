@@ -46,7 +46,6 @@ tell application "System Events"
     keystroke adminEmail
     key code 48
     keystroke adminPassword
-    key code 36
 end tell</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -81,7 +80,7 @@ end tell</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Type `aadmin` in any login form to auto-fill credentials and submit.
+	<string>Type `aadmin` in any login form to auto-fill credentials. Press Return to submit when ready.
 
 Configure the email/username and password to the left. Defaults work well for local WordPress and Laravel dev environments.</string>
 	<key>uidata</key>

@@ -8,7 +8,7 @@ A snippet-triggered Alfred workflow that types common admin credentials into log
 
 ## Usage
 
-Type `aadmin` anywhere to auto-fill the username, tab to the password field, type the password, and submit.
+Type `aadmin` anywhere to auto-fill the username, tab to the password field, and type the password. Press Return to submit when ready.
 
 ## Configuration
 
