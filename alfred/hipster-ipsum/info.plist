@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ironprogrammer.workflows.hipsteripsum</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>C7122C8A-D14E-4C51-81D3-3109ADB1B8F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>ECE118DC-15A2-4812-B0C2-897B917702DA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>ECE118DC-15A2-4812-B0C2-897B917702DA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5D171A17-07B9-436E-8F9E-E482A1F90E24</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>ironprogrammer</string>
+	<key>description</key>
+	<string>Hipster Ipsum generator. Natch.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Hipster Ipsum</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5D171A17-07B9-436E-8F9E-E482A1F90E24</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>100</integer>
+				<key>script</key>
+				<string>&lt;?php
+
+/**
+ * Hipster Ipsum for Alfred 5
+ * Based on tofias' workflow gist: https://gist.github.com/tofias/9160634
+ * (itself based on Seth Lilly's Hipster-Ipsum-for-Coda:
+ *  https://github.com/sethlilly/Hipster-Ipsum-for-Coda)
+ * Uses the Hipster Ipsum API by Jason Cosper: https://hipsum.co
+ *
+ * Keyword:  hipster [count] [format] [type]   (all optional, any order)
+ *   count    number of paragraphs/sentences, 1-99   (default 1)
+ *   format   paras | p | sentences | s              (default paras)
+ *   type     centric | latin                        (default hipster-centric)
+ *   baby     start the text with "I'm baby..."      (off by default)
+ *
+ * Examples
+ *   hipster              1 paragraph, hipster-centric
+ *   hipster 3            3 paragraphs
+ *   hipster 5 sentences  5 sentences
+ *   hipster 2 latin      2 paragraphs of hipster-latin
+ *   hipster baby         1 paragraph starting with "I'm baby..."
+ */
+
+// Defaults
+$COUNT  = 1;
+$TYPE   = 'hipster-centric';
+$FORMAT = 'paras';
+$LOREM  = '';   // set to '&amp;start-with-lorem=1' to begin with "I'm baby..."
+
+// Alfred passes the typed keyword argument to this script as argv.
+$query = trim(implode(' ', array_slice($argv, 1)));
+foreach (preg_split('/\s+/', $query, -1, PREG_SPLIT_NO_EMPTY) as $tok) {
+    $t = strtolower($tok);
+    if (ctype_digit($t)) {
+        $COUNT = max(1, min(99, (int) $t));
+    } elseif ($t === 's' || strncmp($t, 'sent', 4) === 0) {
+        $FORMAT = 'sentences';
+    } elseif ($t === 'p' || strncmp($t, 'para', 4) === 0) {
+        $FORMAT = 'paras';
+    } elseif (strncmp($t, 'lat', 3) === 0) {
+        $TYPE = 'hipster-latin';
+    } elseif (strncmp($t, 'cent', 4) === 0 || strncmp($t, 'hip', 3) === 0) {
+        $TYPE = 'hipster-centric';
+    } elseif ($t === 'baby' || strncmp($t, 'lorem', 5) === 0) {
+        $LOREM = '&amp;start-with-lorem=1';
+    }
+}
+
+$res = file_get_contents("https://hipsum.co/api/?type=$TYPE&amp;$FORMAT=$COUNT$LOREM");
+$ret = json_decode($res);
+
+// Join paragraphs/sentences and collapse double spaces after periods.
+$hipsum = str_replace('  ', ' ', implode("\n\n", $ret));
+
+echo $hipsum;
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ECE118DC-15A2-4812-B0C2-897B917702DA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>hipster</string>
+				<key>subtext</key>
+				<string>[count] [paras|sentences] [latin] [baby] — e.g. “3 sentences baby” (all optional)</string>
+				<key>text</key>
+				<string>Hipster Ipsum</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C7122C8A-D14E-4C51-81D3-3109ADB1B8F7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Type `hipster` followed by any of these — all optional, in any order:
+
+- a number 1–99 (paragraph / sentence count)
+- `paras` or `sentences`
+- `centric` (default) or `latin`
+- `baby` — start the text with “I'm baby...”
+
+e.g. `hipster 3 sentences baby`. The result is pasted into the frontmost app and copied to the clipboard.
+
+Based on tofias' workflow gist (gist.github.com/tofias/9160634), itself based on Seth Lilly's Hipster-Ipsum-for-Coda. Text via the Hipster Ipsum API (hipsum.co) by Jason Cosper.</string>
+	<key>uidata</key>
+	<dict>
+		<key>5D171A17-07B9-436E-8F9E-E482A1F90E24</key>
+		<dict>
+			<key>xpos</key>
+			<real>475.0</real>
+			<key>ypos</key>
+			<real>125.0</real>
+		</dict>
+		<key>C7122C8A-D14E-4C51-81D3-3109ADB1B8F7</key>
+		<dict>
+			<key>xpos</key>
+			<real>55.0</real>
+			<key>ypos</key>
+			<real>125.0</real>
+		</dict>
+		<key>ECE118DC-15A2-4812-B0C2-897B917702DA</key>
+		<dict>
+			<key>xpos</key>
+			<real>270.0</real>
+			<key>ypos</key>
+			<real>125.0</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string>https://brianalexander.com</string>
+</dict>
+</plist>
